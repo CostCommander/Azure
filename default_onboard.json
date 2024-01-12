@@ -3,28 +3,33 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "mspOfferName": {
-            "type": "string",
             "defaultValue": "CostCommander",
+            "type": "String",
             "metadata": {
                 "description": "Specify a unique name for your offer"
             }
         },
         "mspOfferDescription": {
-            "type": "string",
             "defaultValue": "Managed by CostCommander",
+            "type": "String",
             "metadata": {
                 "description": "Name of the Managed Service Provider offering"
             }
         },
         "managedByTenantId": {
-            "type": "string",
             "defaultValue": "7220f56e-615c-46c4-b3e3-801801b3a874",
+            "type": "String",
             "metadata": {
                 "description": "Specify the tenant id of the Managed Service Provider"
             }
         },
+        "linkCode": {
+            "type": "String",
+            "metadata": {
+                "description": "Use the unique code from the CostCommander Onboard page"
+            }
+        },
         "authorizations": {
-            "type": "array",
             "defaultValue": [
                 {
                     "principalId": "ad0b8ab8-a4e6-4ea8-964f-0b24e07daeab",
@@ -32,6 +37,7 @@
                     "principalIdDisplayName": "CostCommander"
                 }
             ],
+            "type": "Array",
             "metadata": {
                 "description": "Specify an array of objects, containing tuples of Azure Active Directory principalId, a Azure roleDefinitionId, and an optional principalIdDisplayName. The roleDefinition specified is granted to the principalId in the provider's Active Directory and the principalIdDisplayName is visible to customers."
             }
@@ -66,12 +72,16 @@
         }
     ],
     "outputs": {
+        "linkCode": {
+            "type": "String",
+            "value": "[parameters('linkCode')]"
+        },
         "mspOfferName": {
-            "type": "string",
+            "type": "String",
             "value": "[concat('Managed by', ' ', parameters('mspOfferName'))]"
         },
         "authorizations": {
-            "type": "array",
+            "type": "Array",
             "value": "[parameters('authorizations')]"
         }
     }
